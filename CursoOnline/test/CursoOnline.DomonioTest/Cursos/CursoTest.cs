@@ -61,7 +61,7 @@ namespace CursoOnline.DomonioTest.Cursos
             // Assert
             Assert.Throws<ArgumentException>(() => 
                 CursoBuilder.Novo().ComNome(nomeInvalido).Build())
-                .ComMensagen("Nome inválido");
+                .ComMensagem("Nome inválido");
         }
 
         [Theory]
@@ -75,7 +75,7 @@ namespace CursoOnline.DomonioTest.Cursos
             // Assert
             Assert.Throws<ArgumentException>(() =>
                 CursoBuilder.Novo().ComCargaHoraria(cargaHorariaInvalida).Build())
-                .ComMensagen("Carga horária inválida");
+                .ComMensagem("Carga horária inválida");
         }
 
         [Theory]
@@ -89,7 +89,7 @@ namespace CursoOnline.DomonioTest.Cursos
             // Assert
             Assert.Throws<ArgumentException>(() =>
                 CursoBuilder.Novo().ComValor(valorInvalido).Build())
-                .ComMensagen("Valor inválido");
+                .ComMensagem("Valor inválido");
         }       
     }    
 }

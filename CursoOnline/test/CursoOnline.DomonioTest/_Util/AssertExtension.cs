@@ -2,7 +2,7 @@
 {
     public static class AssertExtension
     {
-        public static void ComMensagen(this ArgumentException exception, string message)
+        public static void ComMensagem(this ArgumentException exception, string message)
         {
             if (exception.Message == message)
                 Assert.True(true);
