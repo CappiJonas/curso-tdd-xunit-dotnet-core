@@ -1,4 +1,5 @@
-﻿using CursoOnline.Dominio.Cursos;
+﻿using CursoOnline.Dominio._Base;
+using CursoOnline.Dominio.Cursos;
 using CursoOnline.DomonioTest._Builders;
 using CursoOnline.DomonioTest._Util;
 
@@ -51,7 +52,7 @@ namespace CursoOnline.DomonioTest.Cursos
 
             //Act
             //Assert
-            Assert.Throws<ArgumentException>(() => _armazenadorDeCurso.Armazenar(_cursoDto))
+            Assert.Throws<ExcecaoDeDominio>(() => _armazenadorDeCurso.Armazenar(_cursoDto))
                 .ComMensagem("Publico Alvo inválido");
         }
 
@@ -64,7 +65,7 @@ namespace CursoOnline.DomonioTest.Cursos
 
             //Act
             //Assert
-            Assert.Throws<ArgumentException>(() => _armazenadorDeCurso.Armazenar(_cursoDto))
+            Assert.Throws<ExcecaoDeDominio>(() => _armazenadorDeCurso.Armazenar(_cursoDto))
                 .ComMensagem("Nome do curso já consta no banco de dados");
         }
     }
