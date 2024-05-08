@@ -53,20 +53,52 @@ namespace CursoOnline.DomonioTest.Cursos
             //Act
             //Assert
             Assert.Throws<ExcecaoDeDominio>(() => _armazenadorDeCurso.Armazenar(_cursoDto))
-                .ComMensagem("Publico Alvo inválido");
+                .ComMensagem(Resource.PublicoAlvoInvalido);
         }
 
         [Fact]
         public void NaoDeveAdicionarCursoComMesmoNomeDeOutroJaSalvo()
         {
             //Arrange
-            var cursoJaSalvo = CursoBuilder.Novo().ComNome(_cursoDto.Nome).Build();
+            var cursoJaSalvo = CursoBuilder.Novo().ComId(432).ComNome(_cursoDto.Nome).Build();
             _cursoRepositorioMock.Setup(r => r.ObterPeloNome(_cursoDto.Nome)).Returns(cursoJaSalvo);
 
             //Act
             //Assert
             Assert.Throws<ExcecaoDeDominio>(() => _armazenadorDeCurso.Armazenar(_cursoDto))
-                .ComMensagem("Nome do curso já consta no banco de dados");
+                .ComMensagem(Resource.NomeDoCursoJaExiste);
+        }
+
+        [Fact]
+        public void DeveAlterarDadosDoCurso()
+        {
+            //Arrange
+            _cursoDto.Id = 323;
+            var curso = CursoBuilder.Novo().Build();
+            _cursoRepositorioMock.Setup(r => r.ObterPorId(_cursoDto.Id)).Returns(curso);
+
+            //Act
+            _armazenadorDeCurso.Armazenar(_cursoDto);
+
+            //Assert
+            Assert.Equal(_cursoDto.Nome, curso.Nome);
+            Assert.Equal(_cursoDto.Valor, curso.Valor);
+            Assert.Equal(_cursoDto.CargaHoraria, curso.CargaHoraria);
+        }
+
+        [Fact]
+        public void NaoDeveAdicionarNoRepositorioQuandoCursoJaExiste()
+        {
+            //Arrange
+            _cursoDto.Id = 323;
+            var curso = CursoBuilder.Novo().Build();
+            _cursoRepositorioMock.Setup(r => r.ObterPorId(_cursoDto.Id)).Returns(curso);
+
+            //Act
+            _armazenadorDeCurso.Armazenar(_cursoDto);
+
+            //Assert
+            _cursoRepositorioMock.Verify(r => r.Adicionar(It.IsAny<Curso>()), Times.Never);
         }
     }
 }
