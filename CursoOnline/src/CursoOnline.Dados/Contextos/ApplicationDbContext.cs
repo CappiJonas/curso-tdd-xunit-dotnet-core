@@ -1,11 +1,13 @@
-﻿using CursoOnline.Dominio.Cursos;
+﻿using CursoOnline.Dominio.Alunos;
+using CursoOnline.Dominio.Cursos;
 using Microsoft.EntityFrameworkCore;
 
 namespace CursoOnline.Dados.Contextos
 {
     public class ApplicationDbContext : DbContext
     {
-        public DbSet<Curso> Cursos { get; set; }
+        public DbSet<Curso> Cursos { get; set; }    
+        public DbSet<Aluno> Alunos { get; set; }
 
         public ApplicationDbContext(DbContextOptions options) : base(options) { }
 

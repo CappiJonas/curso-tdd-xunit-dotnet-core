@@ -22,7 +22,7 @@
             int.TryParse(request.Query["page"], out int pageIndex);
             pageIndex = pageIndex > 0 ? pageIndex : 1;
 
-            var enumerable = source as IList<T> ?? source.ToList();
+            var enumerable = source != null ? source.ToList() : new List<T>();
             var count = enumerable.Count();
             var items = enumerable.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
             return new PaginatedList<T>(items, count, pageIndex, pageSize);

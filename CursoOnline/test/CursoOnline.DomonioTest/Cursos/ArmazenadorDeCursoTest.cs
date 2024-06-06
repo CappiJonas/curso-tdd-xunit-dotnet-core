@@ -1,5 +1,6 @@
 ﻿using CursoOnline.Dominio._Base;
 using CursoOnline.Dominio.Cursos;
+using CursoOnline.Dominio.PublicosAlvo;
 using CursoOnline.DomonioTest._Builders;
 using CursoOnline.DomonioTest._Util;
 
@@ -24,7 +25,8 @@ namespace CursoOnline.DomonioTest.Cursos
             };
 
             _cursoRepositorioMock = new Mock<ICursoRepositorio>();
-            _armazenadorDeCurso = new ArmazenadorDeCurso(_cursoRepositorioMock.Object);
+            var conversorDePublicoAlvoMock = new Mock<IConversorDePublicoAlvo>();
+            _armazenadorDeCurso = new ArmazenadorDeCurso(_cursoRepositorioMock.Object, conversorDePublicoAlvoMock.Object);
         }
 
         [Fact]
@@ -41,19 +43,6 @@ namespace CursoOnline.DomonioTest.Cursos
                     c.Descricao == _cursoDto.Descricao
                     )
                 ));
-        }
-
-        [Fact]
-        public void NaoDeveInformarPublicoAlvoInvalido()
-        {
-            //Arrange
-            var publicoAlvoInvalido = "Médico";
-            _cursoDto.PublicoAlvo = publicoAlvoInvalido;
-
-            //Act
-            //Assert
-            Assert.Throws<ExcecaoDeDominio>(() => _armazenadorDeCurso.Armazenar(_cursoDto))
-                .ComMensagem(Resource.PublicoAlvoInvalido);
         }
 
         [Fact]

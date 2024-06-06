@@ -1,5 +1,6 @@
 ﻿using CursoOnline.Dominio._Base;
 using CursoOnline.Dominio.Cursos;
+using CursoOnline.Dominio.PublicosAlvo;
 using CursoOnline.DomonioTest._Builders;
 using CursoOnline.DomonioTest._Util;
 
