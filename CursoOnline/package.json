@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "start": "dotnet run -p ./src/CursoOnline.Web/CursoOnline.Web.csproj",
+    "testCafe": "cross-env ./node_modules/.bin/testcafe chrome e2e"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "testcafe": "^3.6.1"
+  }
+}
